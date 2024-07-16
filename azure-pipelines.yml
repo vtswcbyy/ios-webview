@@ -10,6 +10,19 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'ionicblank-certificates.p12'
+    certPwd: 'MbP#123456'
+    keychain: 'temp'
+    keychainPassword: 'abc123'
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'ionicblank.mobileprovision'
+
 - task: Xcode@5
   inputs:
     actions: 'build'
