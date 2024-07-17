@@ -54,7 +54,7 @@ steps:
               issuer_id: ENV["APP_STORE_CONNECT_API_KEY_JSON"]["issuer_id"],
               key_content: ENV["APP_STORE_CONNECT_API_KEY_JSON"]["private_key"]
             )
-            build_app(scheme: "YourAppScheme", export_method: "app-store", output_directory: "./output")
+            build_app(scheme: "", export_method: "app-store", output_directory: "./output")
             upload_to_testflight(api_key: api_key)
           end' > fastlane/Fastfile
   displayName: 'Configure Fastlane'
