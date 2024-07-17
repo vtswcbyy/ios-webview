@@ -33,16 +33,18 @@ steps:
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
 
 - script: |
+    echo 'source "https://rubygems.org"
+          gem "fastlane", ">= 2.221.1"' > Gemfile
+    bundle install
+  displayName: 'Create Gemfile and Install Dependencies'
+  
+- script: |
     sudo gem install bundler
     sudo gem install fastlane
     bundle install
   displayName: 'Install Bundler, Fastlane and dependencies'
 
-- script: |
-    echo 'source "https://rubygems.org"
-          gem "fastlane", ">= 2.221.1"' > Gemfile
-    bundle install
-  displayName: 'Create Gemfile and Install Dependencies'
+
 
 - script: |
     mkdir -p fastlane
