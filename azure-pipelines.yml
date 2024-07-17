@@ -47,7 +47,7 @@ steps:
     echo 'json_key_content("$(APP_STORE_CONNECT_API_KEY_JSON)")' > fastlane/Appfile
     echo 'default_platform(:ios)
           lane :upload do
-            build_app(scheme: "$(APP_SCHEME)", export_method: "app-store", output_directory: "./output")
+            build_app(scheme: "", export_method: "app-store", output_directory: "./output")
             upload_to_testflight
           end' > fastlane/Fastfile
   displayName: 'Configure Fastlane'
