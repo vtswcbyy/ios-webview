@@ -26,8 +26,32 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    scheme: ''
+    scheme: "$(APP_SCHEME)"
     sdk: 'iphoneos'
     configuration: 'Release'
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- script: |
+    pip install --upgrade pip
+    pip install fastlane
+  displayName: 'Install Fastlane'
+
+- script: |
+    mkdir -p fastlane
+    echo 'json_key_content("$(APP_STORE_CONNECT_API_KEY_JSON)")' > fastlane/Appfile
+    echo 'default_platform(:ios)
+          lane :upload do
+            build_app(scheme: "$(APP_SCHEME)", export_method: "app-store", output_directory: "./output")
+            upload_to_testflight
+          end' > fastlane/Fastfile
+  displayName: 'Configure Fastlane'
+
+- script: |
+    fastlane upload
+  displayName: 'Upload to TestFlight'
