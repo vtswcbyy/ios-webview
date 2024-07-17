@@ -39,6 +39,12 @@ steps:
   displayName: 'Install Bundler, Fastlane and dependencies'
 
 - script: |
+    echo 'source "https://rubygems.org"
+          gem "fastlane", ">= 2.221.1"' > Gemfile
+    bundle install
+  displayName: 'Create Gemfile and Install Dependencies'
+
+- script: |
     mkdir -p fastlane
     echo 'json_key_content("$(APP_STORE_CONNECT_API_KEY_JSON)")' > fastlane/Appfile
     echo 'default_platform(:ios)
