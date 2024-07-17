@@ -14,9 +14,9 @@ steps:
 - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: 'ionicblank-certificates.p12'
-    certPwd: 'MbP#123456'
+    certPwd: "$(CERT_PASSWORD)"
     keychain: 'temp'
-    keychainPassword: 'abc123'
+    keychainPassword: "$(KEY_CHAIN_PASSWORD)"
 
 - task: InstallAppleProvisioningProfile@1
   inputs:
