@@ -10,7 +10,7 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-    scheme: 'WebViewTest'
+    scheme: 'web-view'
     sdk: 'iphoneos'
     buildConfiguration: 'Release'
 steps:
