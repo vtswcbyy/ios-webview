@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+variables:
+    scheme: 'WebViewTest'
+    sdk: 'iphoneos'
+    buildConfiguration: 'Release'
 steps:
 
 - task: InstallAppleCertificate@2
@@ -26,9 +30,9 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    scheme: ""
-    sdk: 'iphoneos'
-    configuration: 'Release'
+    scheme: $(scheme)
+    sdk: $(sdk)
+    configuration:  $(buildConfiguration)
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
 
@@ -73,8 +77,13 @@ steps:
               issuer_id: ENV["APPLE_API_ISSUER_ID"],
               key_content: ENV["APPLE_API_PRIVATE_KEY"]
             )
-            build_app(scheme: "", export_method: "app-store", output_directory: "./output")
-            upload_to_testflight(api_key: api_key)
+            #build_app(scheme: "", export_method: "app-store", output_directory: "./output")
+            #upload_to_testflight(api_key: api_key)
+            upload_to_testflight(
+              api_key: api_key, 
+              skip_waiting_for_build_processing: true,
+              ipa: "./output/$(buildConfiguration)/$(sdk)/$(scheme).ipa"
+            )
           end' > fastlane/Fastfile
   displayName: 'Configure Fastlane'
   
