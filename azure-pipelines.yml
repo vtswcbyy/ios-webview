@@ -51,6 +51,7 @@ steps:
     packageApp: true
     exportMethod: 'app-store'
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
+    teamId: 'ALA95YMJ5Z'
     #signingOption: 'auto'
     # args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 - script: |
