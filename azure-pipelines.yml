@@ -37,9 +37,9 @@ steps:
     bundle install
   displayName: 'Install Bundler, Fastlane，cocoapods and dependencies'
 
-- script: |
-    xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
-  displayName: 'List Xcode Schemes'
+# - script: |
+#     xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
+#   displayName: 'List Xcode Schemes'
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -53,6 +53,7 @@ steps:
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
     teamId: 'ALA95YMJ5Z'
     #signingOption: 'auto'
+    signingOption: 'manual'
     args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 - script: |
     pwd
