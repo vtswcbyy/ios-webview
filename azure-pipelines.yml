@@ -37,6 +37,9 @@ steps:
     bundle install
   displayName: 'Install Bundler, Fastlane，cocoapods and dependencies'
 
+- script: |
+    xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
+  displayName: 'List Xcode Schemes'
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -54,9 +57,7 @@ steps:
   
 
 
-- script: |
-    xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
-  displayName: 'List Xcode Schemes'
+
 
 # - script: |
 #     mkdir -p fastlane
