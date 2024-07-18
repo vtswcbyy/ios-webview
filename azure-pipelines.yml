@@ -27,6 +27,16 @@ steps:
     provisioningProfileLocation: 'secureFiles'
     provProfileSecureFile: 'ionicblank.mobileprovision'
 
+- script: |
+    sudo gem install cocoapods
+    pod install
+    echo 'source "https://rubygems.org"
+          gem "fastlane", ">= 2.221.1"' > Gemfile
+    sudo gem install bundler
+    sudo gem install fastlane
+    bundle install
+  displayName: 'Install Bundler, Fastlane，cocoapods and dependencies'
+
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -42,13 +52,11 @@ steps:
 #     bundle install
 #   displayName: 'Create Gemfile and Install Dependencies'
   
+
+
 - script: |
-    echo 'source "https://rubygems.org"
-          gem "fastlane", ">= 2.221.1"' > Gemfile
-    sudo gem install bundler
-    sudo gem install fastlane
-    bundle install
-  displayName: 'Install Bundler, Fastlane and dependencies'
+    xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
+  displayName: 'List Xcode Schemes'
 
 # - script: |
 #     mkdir -p fastlane
