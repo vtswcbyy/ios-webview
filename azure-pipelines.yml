@@ -46,13 +46,13 @@ steps:
     scheme: $(scheme)
     sdk: $(sdk)
     configuration:  $(buildConfiguration)
-    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+    xcWorkspacePath: '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
     packageApp: true
     exportMethod: 'app-store'
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
     signingOption: 'auto'
-    args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
+    # args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 - script: |
     pwd
     ls -R .
