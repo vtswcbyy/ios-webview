@@ -74,6 +74,7 @@ steps:
     packageApp: true
     exportMethod: 'app-store'
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
+    exportOptionsPlist: '$(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist'
     teamId: $(TEAM_ID)
     #signingOption: 'auto'
     #signingOption: 'manual'
