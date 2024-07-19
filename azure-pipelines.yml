@@ -77,24 +77,19 @@ steps:
     xcWorkspacePath: '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
     packageApp: true
-    exportMethod: 'app-store'
-    exportPath: 'output/$(buildConfiguration)/$(sdk)'
-    exportOptionsPlist: '$(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist'
+    #exportMethod: 'app-store'
+    #exportPath: 'output/$(buildConfiguration)/$(sdk)'
+    #exportOptionsPlist: '$(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist'
     exportOptions: 'specify'
     exportTeamId: $(TEAM_ID)
     #signingOption: 'auto'
     #signingOption: 'manual'
-    args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
+    #args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 
-# - script: |
-#     echo 'source "https://rubygems.org"
-#           gem "fastlane", ">= 2.221.1"' > Gemfile
-#     bundle install
-#   displayName: 'Create Gemfile and Install Dependencies'
+- script: |
+    /usr/bin/xcodebuild -exportArchive -archivePath $(Build.ArtifactStagingDirectory)/output/$(Build.BuildId).xcarchive -exportPath $(Build.ArtifactStagingDirectory)/output -exportOptionsPlist $(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist -allowProvisioningUpdates | /usr/local/lib/ruby/gems/3.0.0/bin/xcpretty --no-color
+  displayName: 'Export Archive'
   
-
-
-
 
 # - script: |
 #     mkdir -p fastlane
