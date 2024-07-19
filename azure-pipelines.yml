@@ -13,6 +13,7 @@ variables:
     scheme: 'web-view'
     sdk: 'iphoneos'
     buildConfiguration: 'Release'
+    TEAM_ID: 'ALA95YMJ5Z'
 steps:
 
 - task: InstallAppleCertificate@2
@@ -40,6 +41,28 @@ steps:
 # - script: |
 #     xcodebuild -list -workspace '/Users/runner/work/1/s/web-view.xcodeproj/project.xcworkspace'
 #   displayName: 'List Xcode Schemes'
+
+- script: |
+    echo "Generating exportOptionsPlist..."
+    cat <<EOF > $(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>teamID</key>
+        <string>$(TEAM_ID)</string>
+        <key>method</key>
+        <string>app-store</string>
+        <key>uploadSymbols</key>
+        <true/>
+        <key>compileBitcode</key>
+        <true/>
+        <key>signingStyle</key>
+        <string>automatic</string>
+    </dict>
+    </plist>
+    EOF
+  displayName: 'Generate exportOptionsPlist'
+
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -51,7 +74,7 @@ steps:
     packageApp: true
     exportMethod: 'app-store'
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
-    teamId: 'ALA95YMJ5Z'
+    teamId: $(TEAM_ID)
     #signingOption: 'auto'
     #signingOption: 'manual'
     args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
