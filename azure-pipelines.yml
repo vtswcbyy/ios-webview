@@ -82,7 +82,7 @@ steps:
     exportOptionsPlist: '$(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist'
     #exportOptions: 'specify'
     #exportTeamId: $(TEAM_ID)
-    signingOption: 'auto'
+    #signingOption: 'auto'
     #signingOption: 'manual'
     args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 
