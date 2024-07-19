@@ -80,8 +80,9 @@ steps:
     exportMethod: 'app-store'
     exportPath: 'output/$(buildConfiguration)/$(sdk)'
     exportOptionsPlist: '$(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist'
-    teamId: $(TEAM_ID)
-    #signingOption: 'auto'
+    exportOptions: 'specify'
+    exportTeamId: $(TEAM_ID)
+    signingOption: 'auto'
     #signingOption: 'manual'
     args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
 
