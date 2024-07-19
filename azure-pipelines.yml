@@ -63,6 +63,11 @@ steps:
     EOF
   displayName: 'Generate exportOptionsPlist'
 
+- script: |
+    pwd
+    ls -R .
+    cat $(System.DefaultWorkingDirectory)/_XcodeTaskExportOptions.plist
+  displayName: 'List generated files'
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -79,11 +84,7 @@ steps:
     #signingOption: 'auto'
     #signingOption: 'manual'
     args: '-allowProvisioningUpdates'  # 允许 Xcode 自动处理配置文件
-- script: |
-    pwd
-    ls -R .
-    tree -d .
-  displayName: 'List generated files'
+
 # - script: |
 #     echo 'source "https://rubygems.org"
 #           gem "fastlane", ">= 2.221.1"' > Gemfile
